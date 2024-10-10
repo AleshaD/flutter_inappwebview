@@ -3359,6 +3359,10 @@ class ContentBlockerTriggerResourceType {
     ContentBlockerTriggerResourceType.MEDIA,
     ContentBlockerTriggerResourceType.SVG_DOCUMENT,
     ContentBlockerTriggerResourceType.RAW,
+    ContentBlockerTriggerResourceType.POPUP,
+    ContentBlockerTriggerResourceType.PING,
+    ContentBlockerTriggerResourceType.FETCH,
+    ContentBlockerTriggerResourceType.WEBSOCKET,
   ].toSet();
 
   static ContentBlockerTriggerResourceType? fromValue(String? value) {
@@ -3394,6 +3398,11 @@ class ContentBlockerTriggerResourceType {
 
   ///Any untyped load
   static const RAW = const ContentBlockerTriggerResourceType._internal('raw');
+
+  static const POPUP = const ContentBlockerTriggerResourceType._internal('popup');
+  static const PING = const ContentBlockerTriggerResourceType._internal('ping');
+  static const FETCH = const ContentBlockerTriggerResourceType._internal('fetch');
+  static const WEBSOCKET = const ContentBlockerTriggerResourceType._internal('websocket');
 
   bool operator ==(value) => value == _value;
 
@@ -3453,6 +3462,8 @@ class ContentBlockerActionType {
     ContentBlockerActionType.BLOCK,
     ContentBlockerActionType.CSS_DISPLAY_NONE,
     ContentBlockerActionType.MAKE_HTTPS,
+    ContentBlockerActionType.BLOCK_COOKIES,
+    ContentBlockerActionType.IGNORE_PREVIOUS_RULES,
   ].toSet();
 
   static ContentBlockerActionType? fromValue(String? value) {
@@ -3474,6 +3485,13 @@ class ContentBlockerActionType {
 
   ///Stops loading of the resource. If the resource was cached, the cache is ignored.
   static const BLOCK = const ContentBlockerActionType._internal('block');
+
+  ///Strips cookies from the header before sending it to the server. This only blocks cookies otherwise acceptable to 
+  ///Safari’s privacy policy. Combining with ignore-previous-rules doesn’t override the browser’s privacy settings.
+  static const BLOCK_COOKIES = const ContentBlockerActionType._internal('block-cookies');
+
+  ///Ignores previously triggered actions. 
+  static const IGNORE_PREVIOUS_RULES = const ContentBlockerActionType._internal('ignore-previous-rules');
 
   ///Hides elements of the page based on a CSS selector. A selector field contains the selector list. Any matching element has its display property set to none, which hides it.
   ///
